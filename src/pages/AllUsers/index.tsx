@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function AllUsers() {
-  return (
-    <div>AllUsers</div>
-  )
+  return <div className="text-white">AllUsers</div>;
 }
 
-export default AllUsers
+export default AllUsers;

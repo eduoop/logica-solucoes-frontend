@@ -2,7 +2,7 @@ import React from 'react'
 
 function RecordedUsers() {
   return (
-    <div>RecordedUsers</div>
+    <div className='text-white'>RecordedUsers</div>
   )
 }
 

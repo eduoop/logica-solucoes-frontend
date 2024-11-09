@@ -15,7 +15,7 @@ const DrawerMenu = () => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="flex w-full items-center justify-end border-b-[1px] border-solid border-[#1C1C1C1A] bg-white py-2 pr-2 laptop:hidden">
+    <div className="flex w-full items-center justify-end bg-[#111827] py-2 pr-2 laptop:hidden">
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <Button variant="secondary" size={"icon"}>
@@ -23,9 +23,9 @@ const DrawerMenu = () => {
           </Button>
         </SheetTrigger>
 
-        <SheetContent className="flex flex-col bg-white p-0 text-black">
+        <SheetContent className="flex flex-col bg-[#111827] p-0 text-white">
           <SheetHeader className="flex-2 mb-6 border-b border-solid border-secondary p-5 text-left">
-            <SheetTitle className="text-black">Menu</SheetTitle>
+            <SheetTitle className="text-white">Menu</SheetTitle>
           </SheetHeader>
 
           <div className="flex-1">

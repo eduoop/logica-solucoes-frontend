@@ -13,9 +13,9 @@ interface LinkButtonProps {
 
 const LinkButton = ({ route }: LinkButtonProps) => {
   const currentLinkStyle =
-    "flex items-center font-[400] text-black text-[16px] gap-2 bg-gray-200 p-2 rounded-xl";
+    "flex items-center font-[400] text-white text-[16px] gap-2 bg-gray-200/10 p-2 rounded-xl";
   const linkStyle =
-    "flex items-center font-[400] text-black text-[16px] gap-2 p-2 rounded-xl duration-200 hover:bg-gray-100 hover:opacity-80";
+    "flex items-center font-[400] text-white text-[16px] gap-2 p-2 rounded-xl duration-200 hover:bg-gray-100/20 hover:opacity-80";
 
   return (
     <TooltipProvider>

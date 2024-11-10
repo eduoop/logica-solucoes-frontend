@@ -1,50 +1,74 @@
-# React + TypeScript + Vite
+# Logica solucoes frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Um dashboard para gerenciamento de usuários.
 
-Currently, two official plugins are available:
+## 💻 Pré-requisitos
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
-## Expanding the ESLint configuration
+- Você instalou a versão 18 ou superior do `<NodeJS>`
+- Você instalou a versão 2.39 ou superior do `<Git>`
+- Você tem uma máquina `<Windows / Linux / Mac>`.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 🚀 Instalando
 
-- Configure the top-level `parserOptions` property like this:
+Para instalar o projeto, faça isso:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+Linux, macOS e Windows:
+
+## 1. Clone o projeto do GitHub:
+
+```
+<git clone https://github.com/eduoop/logica-solucoes-frontend.git>
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## 2. Entre na pasta do projeto:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
 ```
+<cd logica-solucoes-frontend>
+```
+
+## 3. Instale as dependências usando o npm:
+
+```
+<npm i>
+```
+
+## 4. Crie um .env na raiz do projeto e adicione:
+
+```
+VITE_API_BASE_URL="http://localhost:3333"
+```
+
+## ☕ Usando
+
+```
+para rodar o projeto, use: <npm run dev>
+```
+
+## Tecnologias Utilizadas
+
+- **React** (v18)
+- **Tailwind CSS** (v3)
+- **TypeScript** (v5)
+
+## 🤝 Criador
+
+Feito Por:
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="#" title="defina o titulo do link">
+        <img src="https://avatars.githubusercontent.com/u/85969484?s=400&u=b0e89e575a7cb91fc9f8a69e126a9d7587aa9478&v=4" width="100px;" alt="Foto do Eduardo Meneses no GitHub"/><br>
+        <sub>
+          <b>Eduardo Meneses</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+## 📝 Licença
+
+Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes.

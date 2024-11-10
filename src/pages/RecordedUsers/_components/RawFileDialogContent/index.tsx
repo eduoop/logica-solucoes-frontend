@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import { CsvService } from "@/shared/services/entites/csv-service/CsvService";
 import { CgSpinner } from "react-icons/cg";
 import { User } from "@/models/user.model";
+import { DialogDescription } from "@radix-ui/react-dialog";
 
 function RawFileDialogContent() {
   const [loadingRawFile, setLaodingRawFile] = useState(false);
@@ -29,7 +30,7 @@ function RawFileDialogContent() {
       const values = line.split(",");
 
       return headers.reduce((obj, header, index) => {
-        obj[header as keyof User] = values[index];
+        (obj[header as keyof User] as unknown) = values[index];
         return obj;
       }, {} as User);
     });
@@ -42,6 +43,7 @@ function RawFileDialogContent() {
   return (
     <DialogContent className="flex h-[500px] w-[90%] max-w-full justify-center overflow-hidden">
       <DialogTitle className="hidden" />
+      <DialogDescription className="hidden" />
       <Tabs
         defaultValue="table"
         className="flex h-full w-full flex-col items-center"

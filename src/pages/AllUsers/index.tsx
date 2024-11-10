@@ -78,7 +78,10 @@ function AllUsers() {
       <Button
         disabled={isLoadingAllUsers}
         className="mb-6 rounded-full"
-        onClick={fetchAllUsers}
+        onClick={() => {
+          fetchAllUsers();
+          setSelectedUsers([]);
+        }}
       >
         Atualizar
         <TbReload className={isLoadingAllUsers ? styles.spinVariable : ""} />

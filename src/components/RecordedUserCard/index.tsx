@@ -40,7 +40,7 @@ function RecordedUserCard({
   const [openEdit, setOpenEdit] = useState(false)
 
   const cardClasses = cn(
-    "p-4 rounded-lg shadow-md w-[200px] group relative transition-transform w-full sm:w-[200px] select-none",
+    "p-4 rounded-lg shadow-md w-full group relative transition-transform w-full sm:w-[200px] select-none",
     disableActions ? "cursor-default" : "cursor-pointer hover:scale-105",
     variant === "select"
       ? "bg-yellow-600 border-2 border-solid border-white"
@@ -120,7 +120,7 @@ function RecordedUserCard({
   return disableActions ? (
     <TooltipProvider>
       <Tooltip>
-        <TooltipTrigger>{cardContent}</TooltipTrigger>
+        <TooltipTrigger className="w-full sm:w-[200px]">{cardContent}</TooltipTrigger>
         <TooltipContent>Não é possível selecionar</TooltipContent>
       </Tooltip>
     </TooltipProvider>

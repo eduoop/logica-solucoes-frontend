@@ -37,7 +37,7 @@ Linux, macOS e Windows:
 ## 4. Crie um .env na raiz do projeto e adicione:
 
 ```
-VITE_API_BASE_URL="http://localhost:3333"
+VITE_API_BASE_URL="http://localhost:3333" (caso tenha alterado a porta no backend, alterar aqui também)
 ```
 
 ## ☕ Usando

@@ -24,7 +24,7 @@ function UserCard({
   disableActions = false,
 }: UserCardProps) {
   const cardClasses = cn(
-    "p-4 rounded-lg shadow-md w-[200px] group relative transition-transform w-full sm:w-[200px] select-none",
+    "p-4 rounded-lg shadow-md w-full group relative transition-transform w-full sm:w-[200px] select-none",
     disableActions ? "cursor-default" : "cursor-pointer hover:scale-105",
     variant === "select"
       ? "bg-yellow-600 border-2 border-solid border-white"
@@ -76,12 +76,12 @@ function UserCard({
         (variant === "select" ? (
           <BsFillBookmarkDashFill
             size={20}
-            className="absolute right-2 top-2 bg-transparent text-[#111827] opacity-0 transition-opacity hover:scale-110 group-hover:opacity-100"
+            className="opacity-1 absolute right-2 top-2 bg-transparent text-[#111827] transition-opacity hover:scale-110 group-hover:opacity-100 sm:opacity-0"
           />
         ) : (
           <BsFillBookmarkPlusFill
             size={20}
-            className="absolute right-2 top-2 bg-transparent text-[#111827] opacity-0 transition-opacity hover:scale-110 group-hover:opacity-100"
+            className="opacity-1 absolute right-2 top-2 bg-transparent text-[#111827] transition-opacity hover:scale-110 group-hover:opacity-100 sm:opacity-0"
           />
         ))}
     </div>
@@ -90,7 +90,9 @@ function UserCard({
   return disableActions ? (
     <TooltipProvider>
       <Tooltip>
-        <TooltipTrigger>{cardContent}</TooltipTrigger>
+        <TooltipTrigger className="w-full sm:w-[200px]" asChild>
+          {cardContent}
+        </TooltipTrigger>
         <TooltipContent>Não é possível selecionar</TooltipContent>
       </Tooltip>
     </TooltipProvider>

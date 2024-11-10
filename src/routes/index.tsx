@@ -8,7 +8,7 @@ import { Default } from "@/layout";
 const HomeRouter = lazy(() =>
   import("@/pages/AllUsers/router").then((module) => ({
     default: module.Router,
-  })), 
+  })),
 );
 
 const RecordedUsersRouter = lazy(() =>
@@ -29,7 +29,7 @@ export function Router(): ReactElement {
       <Routes>
         <Route element={<Default />}>
           <Route element={<Navigate to="/" />} />
-          <Route path="/" element={<HomeRouter />} />
+          <Route path="/*" element={<HomeRouter />} />
           <Route path="recorded-users/*" element={<RecordedUsersRouter />} />
         </Route>
       </Routes>

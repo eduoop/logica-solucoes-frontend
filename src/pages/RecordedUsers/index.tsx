@@ -152,20 +152,21 @@ function RecordedUsers() {
           />
         </Button>
 
-        <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger asChild>
-            <Button
-              disabled={isLoadingRecordedUsers}
-              className="mb-6 rounded-full bg-yellow-600"
-              onClick={() => {}}
-            >
-              Arquivo
-              <IoFileTrayFull />
-            </Button>
-          </DialogTrigger>
+        {recordedUsersData.length > 0 && (
+          <Dialog open={open} onOpenChange={setOpen}>
+            <DialogTrigger asChild>
+              <Button
+                disabled={isLoadingRecordedUsers}
+                className="mb-6 rounded-full bg-yellow-600"
+              >
+                Arquivo
+                <IoFileTrayFull />
+              </Button>
+            </DialogTrigger>
 
-          {open && <RawFileDialogContent />}
-        </Dialog>
+            {open && <RawFileDialogContent />}
+          </Dialog>
+        )}
       </div>
 
       <div className="mb-6 flex w-full justify-center">

@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
 import { TbReload } from "react-icons/tb";
+import { IoFileTrayFull } from "react-icons/io5";
 import { User } from "@/models/user.model";
-import { CgSpinner } from "react-icons/cg";
 import { Button } from "@/components/ui/button";
 import RecordedUserCard from "@/components/RecordedUserCard";
 import UsersSkeletonList from "@/components/UsersSkeletonList";
@@ -14,6 +14,8 @@ import notFound from "@/assets/not_found.svg";
 import styles from "./styles.module.css";
 import SearchRecordedUsers from "./_components/SearchRecordedUsers";
 import { toast } from "sonner";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import RawFileDialogContent from "./_components/RawFileDialogContent";
 
 function RecordedUsers() {
   const [recordedUsersData, setRecordedUsersData] = useState<User[]>([]);
@@ -24,6 +26,7 @@ function RecordedUsers() {
   const [totalItems, setTotalItems] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isRemovingRecordedUser, setIsRemovingRecordedUser] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const { ref, inView } = useInView();
 
@@ -132,21 +135,38 @@ function RecordedUsers() {
 
   return (
     <div className="pb-32">
-      <Button
-        disabled={isLoadingRecordedUsers}
-        className="mb-6 rounded-full"
-        onClick={() => {
-          setRecordedUsersData([]);
-          setSelectedUsers([]);
-          setPage(1);
-          fetchAllRecordedUsers(1, search);
-        }}
-      >
-        Atualizar
-        <TbReload
-          className={isLoadingRecordedUsers ? styles.spinVariable : ""}
-        />
-      </Button>
+      <div className="flex flex-wrap items-center gap-3">
+        <Button
+          disabled={isLoadingRecordedUsers}
+          className="mb-6 rounded-full"
+          onClick={() => {
+            setRecordedUsersData([]);
+            setSelectedUsers([]);
+            setPage(1);
+            fetchAllRecordedUsers(1, search);
+          }}
+        >
+          Atualizar
+          <TbReload
+            className={isLoadingRecordedUsers ? styles.spinVariable : ""}
+          />
+        </Button>
+
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogTrigger asChild>
+            <Button
+              disabled={isLoadingRecordedUsers}
+              className="mb-6 rounded-full bg-yellow-600"
+              onClick={() => {}}
+            >
+              Arquivo
+              <IoFileTrayFull />
+            </Button>
+          </DialogTrigger>
+
+          {open && <RawFileDialogContent />}
+        </Dialog>
+      </div>
 
       <div className="mb-6 flex w-full justify-center">
         <SearchRecordedUsers setValue={setSearch} />
@@ -167,12 +187,14 @@ function RecordedUsers() {
             ))}
           </div>
         ) : (
-          <div className="flex w-full flex-col items-center justify-center gap-10 mt-10">
-            <h1 className="text-xl font-semibold text-yellow-600 text-center">
-              Não encontramos nenhum usuário gravado
-            </h1>
-            <img className="w-96" src={notFound} alt="not found" />
-          </div>
+          !isLoadingRecordedUsers && (
+            <div className="mt-10 flex w-full flex-col items-center justify-center gap-10">
+              <h1 className="text-center text-xl font-semibold text-yellow-600">
+                Não encontramos nenhum usuário gravado
+              </h1>
+              <img className="w-96" src={notFound} alt="not found" />
+            </div>
+          )
         )}
 
         {isLoadingRecordedUsers && recordedUsersData.length !== totalItems && (
@@ -188,14 +210,7 @@ function RecordedUsers() {
         />
       )}
 
-      <div ref={ref} className="flex w-full justify-center py-8">
-        {isLoadingRecordedUsers && page > 1 ? (
-          <CgSpinner
-            size={40}
-            className={`text-font-primary animate-spin text-2xl ${styles.spinVariable}`}
-          />
-        ) : null}
-      </div>
+      {recordedUsersData.length > 0 && <div ref={ref} />}
     </div>
   );
 }

@@ -22,6 +22,8 @@ import {
 import { Input } from "../ui/input";
 import { RecordedUserService } from "@/shared/services/entites/recorded-user-service/RecordedUserService";
 import { CgSpinner } from "react-icons/cg";
+import { toast } from "sonner";
+import { Button } from "../ui/button";
 
 interface EditRecordedUserDialogProps {
   user: User;
@@ -37,6 +39,9 @@ const noCommas = z
   .min(1, { message: "Este campo é obrigatório." })
   .refine((value) => !value.includes(","), {
     message: "Não pode conter vírgulas.",
+  })
+  .refine((value) => value.trim().length > 0, {
+    message: "Não pode ser um campo em branco.",
   });
 
 const editRecordedUserSchema = z.object({
@@ -48,6 +53,9 @@ const editRecordedUserSchema = z.object({
     .email()
     .refine((value) => !value.includes(","), {
       message: "Não pode conter vírgulas.",
+    })
+    .refine((value) => value.trim().length > 0, {
+      message: "Não pode ser um campo em branco.",
     }),
   date_of_birth: noCommas,
   phone_number: noCommas,
@@ -71,12 +79,21 @@ function EditRecordedUserDialog({
 
   const onSubmit = async (data: IEditRecordedUserSchema) => {
     setSavingRecordedUser(true);
-    try {
-      await RecordedUserService.updateRecordedUser(user.id, data);
 
-      updateRecordedUser(user.id, data);
+    const hasChanges = Object.keys(data).some((key) => {
+      const typedKey = key as keyof IEditRecordedUserSchema;
+      return data[typedKey] !== user[typedKey];
+    });
+
+    try {
+      if (hasChanges) {
+        await RecordedUserService.updateRecordedUser(user.id, data);
+        updateRecordedUser(user.id, data);
+      }
 
       closeEdit();
+
+      toast.success("Usuário editado com sucesso");
     } catch (error) {
       console.error("Erro ao atualizar o usuário", error);
     } finally {
@@ -213,7 +230,7 @@ function EditRecordedUserDialog({
 
       <AlertDialogFooter>
         <AlertDialogCancel className="rounded-full">Cancelar</AlertDialogCancel>
-        <AlertDialogAction
+        <Button
           className="rounded-full"
           disabled={savingRecordedUser}
           onClick={() => {
@@ -228,7 +245,7 @@ function EditRecordedUserDialog({
           ) : (
             "Confirmar"
           )}{" "}
-        </AlertDialogAction>
+        </Button>
       </AlertDialogFooter>
     </AlertDialogContent>
   );

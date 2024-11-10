@@ -34,7 +34,7 @@ function SearchRecordedUsers({ setValue }: SearchRecordedUsersProps) {
       <Input
         type="text"
         onChange={(e) => onInputWithDebouncing(e.target.value)}
-        placeholder="Buscar por usuário"
+        placeholder="Buscar por nome ou usuário"
         className="w-full px-4 py-5 pl-10 text-[16px] font-medium"
       />
       <BiSearch

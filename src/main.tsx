@@ -5,7 +5,7 @@ import App from "./App.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <>
-    <Toaster />
+    <Toaster position="bottom-left" />
     <App />
   </>,
 );

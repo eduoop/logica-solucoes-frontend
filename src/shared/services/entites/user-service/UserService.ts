@@ -1,29 +1,19 @@
 import { api } from "@/lib/api";
 import { ApiException } from "../../ApiException";
-
-export interface IAllUserResponse {
-  id: number;
-  first_name: string;
-  last_name: string;
-  username: string;
-  email: string;
-  avatar: string;
-  date_of_birth: string;
-  phone_number: string;
-}
+import { User } from "@/models/user.model";
 
 export interface IPagination {
   itemsPerPage: number;
 }
 
 export interface IUsersApiResponse {
-  data: IAllUserResponse[]; 
+  data: User[]; 
   pagination: IPagination; 
 }
 
 const getAllUsers = async (): Promise<IUsersApiResponse> => {
   try {
-    const response = await api.get<IUsersApiResponse>(`/users?limit=10`);
+    const response = await api.get<IUsersApiResponse>(`/users?limit=20`);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -31,6 +21,18 @@ const getAllUsers = async (): Promise<IUsersApiResponse> => {
   }
 };
 
+const saveUsers = async (usersData: User[]) => {
+  try {
+    await api.post<{ users: User[] }>(`/users`, {
+      users: usersData,
+    });
+  } catch (error) {
+    console.log(error)
+    throw new ApiException('Erro ao criar um novo usuário');
+  }
+};
+
 export const UserService = {
   getAllUsers,
+  saveUsers
 };
